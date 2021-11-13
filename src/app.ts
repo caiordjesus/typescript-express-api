@@ -9,11 +9,7 @@ import route_map from './assets/route_map'
 import server from './server'
 
 const app = express()
-
-// App Health Check
-app.get('/', function(req: express.Request, res: express.Response) {
-    res.json({ message: 'Status ok.' })
-})
+app.use(routes)
 
 app.use(bodyParser.json())
 

@@ -1,7 +1,9 @@
 import express from 'express'
 const router = express.Router()
 
-
-router.use('/', (req: any, res: any) => { res.json({"message": "Cheguei"}) })
+// App Health Check
+router.get('/', function(req: express.Request, res: express.Response) {
+    res.json({ message: 'Status ok.' })
+})
 
 export default router
