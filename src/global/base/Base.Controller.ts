@@ -22,7 +22,7 @@ export default abstract class BaseController {
             // if (req.profile) this.injectProfile(req.profile)
             const response = await this.executeImpl(req)
             return response
-        } catch (err) {
+        } catch (err: any) {
             console.log(`[BaseController]: Uncaught controller error`)
             console.log(err)
             return this.responseServerError.fail(err)
