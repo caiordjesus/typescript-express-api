@@ -2,7 +2,7 @@ import colors from './assets/colors';
 
 export default async function init(app: any) {
   try {
-    app.listen(3001, () => {
+    app.listen(process.env.PORT || 3001, () => {
       console.log(colors.bright, colors.fgWhite, 'Express App Listening on Port 3001');
     });
   } catch (error) {
