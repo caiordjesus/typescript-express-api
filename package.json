@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "ts-node-dev --files -r tsconfig-paths/register src/app.ts",
     "start": "node dist/app.js",
+    "postinstall": "tsc",
     "build": "tsc",
-    "lint": "eslint ./src --fix --ext .ts"
+    "lint": "eslint ./src --fix --ext .ts",
+    "deploy": "git add . && git commit -m \"Application automatic deploy\""
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -34,7 +36,7 @@
     }
   },
   "engines": {
-    "node": ">=10.16.3"
+    "node": ">=16.13.0"
   },
   "_moduleAliases": {
     "@global": "dist/global"
