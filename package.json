@@ -8,7 +8,7 @@
     "postinstall": "tsc",
     "build": "tsc",
     "lint": "eslint ./src --fix --ext .ts",
-    "deploy": "git add . && git commit -m \"Application automatic deploy\""
+    "deploy": "git add . && git commit -m \"Application automatic deploy\" && git push"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
