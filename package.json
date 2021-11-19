@@ -39,7 +39,7 @@
     "node": ">=16.13.0"
   },
   "_moduleAliases": {
-    "@global": "src/global"
+    "@global": "dist/global"
   },
   "engineStrict": true
 }
