@@ -16,7 +16,6 @@
     "express-list-endpoints": "^6.0.0",
     "husky": "^7.0.1",
     "module-alias": "^2.2.2",
-    "mongoose": "^6.0.13",
     "typescript": "^4.3.5"
   },
   "devDependencies": {
