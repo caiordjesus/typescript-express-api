@@ -33,7 +33,7 @@ async function populate(){
     
     console.log('lista:10_personalizacoes_mais_acessadas')
     await client.set('lista:10_personalizacoes_mais_acessadas', JSON.stringify({
-        produtos: [
+        personalizacoes: [
             'M&M',
             'ganache de chocolate',
             'oreo',
@@ -49,7 +49,7 @@ async function populate(){
 
     console.log('lista:top_forma_de_pagamento')
     await client.set('lista:top_forma_de_pagamento', JSON.stringify({
-        produtos: [
+        formas_pagamento: [
             'Pix',
             'Cartão'
         ]
