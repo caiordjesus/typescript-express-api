@@ -15,7 +15,7 @@ async function connect() {
 
 async function populate(){
     const client = await connect()
-    console.log('lista:produtos')
+    console.log('lista:10_produtos_mais_acessados')
     await client.set('lista:10_produtos_mais_acessados', JSON.stringify({
         produtos: [
             'pao',
