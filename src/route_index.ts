@@ -1,6 +1,8 @@
 import { redisClientConnect } from './global/config/redis_config';
 import express from 'express'
 
+import auth_routes from './routes/auth'
+
 const router = express.Router()
 
 // App Health Check
@@ -16,5 +18,7 @@ router.get('/produtos/mais_acessados', async function(req: express.Request, res:
     
     res.json(JSON.parse(value))
 })
+
+router.use('/auth', auth_routes)
 
 export default router

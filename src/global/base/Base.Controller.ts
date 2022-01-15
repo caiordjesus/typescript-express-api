@@ -7,8 +7,8 @@ export default abstract class BaseController {
 
     useCase!: BaseUseCase<any, any>
 
-    constructor() {
-        // this.useCase = useCase
+    constructor(useCase: BaseUseCase<any, any>) {
+        this.useCase = useCase
     }
 
     protected abstract executeImpl (req: HttpRequest): Promise<void | any>
@@ -20,7 +20,7 @@ export default abstract class BaseController {
     public async execute (req: HttpRequest): Promise<void | any> {
         try {
             // if (req.profile) this.injectProfile(req.profile)
-            const response = await this.executeImpl(req)
+            const response: BaseApiResponse = await this.executeImpl(req)
             return response
         } catch (err: any) {
             console.log(`[BaseController]: Uncaught controller error`)
@@ -29,7 +29,7 @@ export default abstract class BaseController {
         }
     }
 
-    private static apiResponse(response: BaseApiResponse) {
+    private static apiResponse(response: any) {
         return response
     }
 
@@ -37,10 +37,10 @@ export default abstract class BaseController {
     protected readonly responseSuccess = {
         ok<T> (dto?: T) {
             if (!!dto) {
-                const resp = new ApiSuccess(dto)
+                const resp: ApiSuccess = new ApiSuccess(dto)
                 return BaseController.apiResponse(resp)
             } else {
-                const resp = new ApiSuccess()
+                const resp: ApiSuccess = new ApiSuccess()
                 return BaseController.apiResponse(resp)
             }
         },
