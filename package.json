@@ -9,8 +9,10 @@
     "build": "tsc",
     "lint": "eslint ./src --fix --ext .ts",
     "deploy": "git add . && git commit -m \"Application automatic deploy\" && git push",
+    "deps": "docker-compose --project-name padaria-kipao up -d",
     "populate-redis": "node migrations/populate_redis.js",
-    "deps": "docker-compose --project-name padaria-kipao up -d"
+    "populate-postgres": "PGPASSWORD=kipao psql -h 127.0.0.1 --port 5432 -U kipao kipao < ./migrations/migration_pg.sql",
+    "populate": "node migrations/populate_redis.js && PGPASSWORD=kipao psql -h 127.0.0.1 --port 5432 -U kipao kipao < ./migrations/migration_pg.sql"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

@@ -1,8 +1,9 @@
 const redis = require('redis')
 
 async function connect() {
+    // url: 'redis://:kJEdJUy4bkwG1baXFJ4fZsa0crlpm1UR@redis-17776.c16.us-east-1-3.ec2.cloud.redislabs.com:17776'
     const redisConfig = {
-        url: 'redis://:kJEdJUy4bkwG1baXFJ4fZsa0crlpm1UR@redis-17776.c16.us-east-1-3.ec2.cloud.redislabs.com:17776'
+        url: 'redis://:@localhost:6379'
     }
     const client = redis.createClient(redisConfig);
 

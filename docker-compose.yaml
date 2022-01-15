@@ -15,8 +15,18 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
+    networks:
+      - postgres-compose-network
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - postgres-compose-network
+
   redis:
-    image: redis:5.0.10-alpine
+    image: redis:6.2.3
     ports:
     - "6379:6379"
     healthcheck:
@@ -24,3 +34,10 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
+
+volumes:
+  postgres: {}
+
+networks: 
+  postgres-compose-network:
+    driver: bridge
