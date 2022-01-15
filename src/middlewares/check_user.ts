@@ -1,4 +1,7 @@
 export default async(req: any, res: any, next: any) => {
-    console.log('Checando usuário')
+    const token = req.headers.token
+    if(!token)
+        return res.status(403).json({message: "Você tomou uma torta na cara"})
+        
     return next()
 }

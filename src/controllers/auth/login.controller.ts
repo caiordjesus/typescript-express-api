@@ -6,6 +6,6 @@ export default class LoginController extends BaseController{
     }
 
     protected executeImpl(req: HttpRequest): Promise<any> {
-        return this.responseSuccess.ok()
+        return this.responseSuccess.ok({token: "heuheuheuhue-1"})
     }
 }
