@@ -9,7 +9,8 @@
     "build": "tsc",
     "lint": "eslint ./src --fix --ext .ts",
     "deploy": "git add . && git commit -m \"Application automatic deploy\" && git push",
-    "populate-redis": "node migrations/populate_redis.js"
+    "populate-redis": "node migrations/populate_redis.js",
+    "deps": "docker-compose --project-name padaria-kipao up -d"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

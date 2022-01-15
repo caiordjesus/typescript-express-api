@@ -1,11 +1,10 @@
 import { ApiError, ApiSuccess } from '../handlers/ApiResponses'
 import { BaseApiResponse } from './Base.ApiResponseHandler'
 import BaseUseCase from "./Base.UseCase";
-import User from "./User";
 
 export default abstract class BaseController {
 
-    useCase!: BaseUseCase<any, any>
+    useCase: BaseUseCase<any, any>
 
     constructor(useCase: BaseUseCase<any, any>) {
         this.useCase = useCase
@@ -13,13 +12,8 @@ export default abstract class BaseController {
 
     protected abstract executeImpl (req: HttpRequest): Promise<void | any>
 
-    private injectProfile(profile: any) {
-        this.useCase.injectProfile(new User(profile))
-    }
-
     public async execute (req: HttpRequest): Promise<void | any> {
         try {
-            // if (req.profile) this.injectProfile(req.profile)
             const response: BaseApiResponse = await this.executeImpl(req)
             return response
         } catch (err: any) {

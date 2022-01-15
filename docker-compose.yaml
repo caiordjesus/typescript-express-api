@@ -1,0 +1,26 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:9.6.9
+    ports:
+    - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql
+    environment:
+    - POSTGRES_DB=kipao
+    - POSTGRES_USER=kipao
+    - POSTGRES_PASSWORD=kipao
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+  redis:
+    image: redis:5.0.10-alpine
+    ports:
+    - "6379:6379"
+    healthcheck:
+      test:  [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5

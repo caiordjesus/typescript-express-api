@@ -1,4 +1,5 @@
-import { BaseApiResponse } from "@global/base/Base.ApiResponseHandler"
+import { BaseApiResponse } from "global/base/Base.ApiResponseHandler"
+
 
 interface IApiError {
     getdetails(): string
