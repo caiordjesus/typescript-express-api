@@ -2,7 +2,7 @@ import express from 'express'
 
 import auth_routes from './routes/auth'
 import products_routes from './routes/products'
-import { check_user_middleware } from 'middlewares'
+import { check_user_middleware } from './middlewares'
 
 const router = express.Router()
 
