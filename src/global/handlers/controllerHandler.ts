@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { BaseApiResponse } from 'global/base/Base.ApiResponseHandler'
-import BaseController from 'global/base/Base.Controller'
+import { BaseApiResponse } from '../base/Base.ApiResponseHandler'
+import BaseController from '../base/Base.Controller'
 
 
 const controllerHandler = (controller: BaseController) => {
