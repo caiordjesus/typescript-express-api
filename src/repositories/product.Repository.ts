@@ -1,8 +1,14 @@
 import BaseRepository from "../global/base/Base.Repository"
 
 export default class ProductRepository extends BaseRepository {
-    protected create(dto: any): Promise<any> {
-        return Promise.resolve({})
+    protected async create(dto: IProduct): Promise<any> {
+        await this.ormClient?.produto.create({
+            data: {
+                nome: dto.name,
+                preco_unitario: dto.unitaryPrice,
+                metrica: dto.metric
+            }
+        })
     }
     protected delete(id: number): Promise<any> {
         return Promise.resolve({})

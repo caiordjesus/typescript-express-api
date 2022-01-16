@@ -2797,6 +2797,18 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
+validator.ts@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/validator.ts/-/validator.ts-0.2.2.tgz#a36501591c113aaa3814816fd74a1b4edaa61cec"
+  integrity sha1-o2UBWRwROqo4FIFv10obTtqmHOw=
+  dependencies:
+    validator "^5.1.0"
+
+validator@^5.1.0:
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-5.7.0.tgz#7a87a58146b695ac486071141c0c49d67da05e5c"
+  integrity sha1-eoelgUa2laxIYHEUHAxJ1n2gXlw=
+
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"

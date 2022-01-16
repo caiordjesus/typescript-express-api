@@ -38,6 +38,18 @@ export default abstract class BaseRepository {
         }
     }
 
+    public async createNew(dto: any): Promise<any> {
+        try {
+            this.connect()
+            const obj = await this.create(dto)
+            this.disconnect()
+            return obj
+        } catch (err) {
+            this.disconnect()
+            console.log('[BASE REPOSITORY - ERROR] msg:', err)
+        }
+    }
+
     private connect() {
         if (!this.connected) {
             this.ormClient = new PrismaClient()

@@ -1,10 +1,13 @@
 import MostAccessedProductsUseCase from "./mostAccessedProducts.useCase";
-import productsUseCase from "./products.UseCase";
+import GetProductsUseCase from "./GetProducts.UseCase";
+import PostProductUseCase from "./PostProduct.UseCase";
 
 const mostAccessedProductsUC = new MostAccessedProductsUseCase()
-const productsUC = new productsUseCase()
+const productsUC = new GetProductsUseCase()
+const postProductUC = new PostProductUseCase()
 
 export {
     mostAccessedProductsUC,
-    productsUC
+    productsUC,
+    postProductUC
 }
