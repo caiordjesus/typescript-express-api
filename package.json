@@ -15,11 +15,13 @@
     "populate": "node migrations/populate_redis.js && PGPASSWORD=kipao psql -h 127.0.0.1 --port 5432 -U kipao kipao < ./migrations/migration_pg.sql"
   },
   "dependencies": {
+    "@prisma/client": "^3.8.1",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-list-endpoints": "^6.0.0",
     "husky": "^7.0.1",
     "module-alias": "^2.2.2",
+    "prisma": "^3.8.1",
     "redis": "^4.0.1",
     "typescript": "^4.3.5"
   },

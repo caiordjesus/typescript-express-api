@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cliente {
+  celular       String?
+  id            Int        @id @default(autoincrement())
+  fk_usuario_id Int?
+  usuario       usuario?   @relation(fields: [fk_usuario_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_cliente_usuario")
+  endereco      endereco[]
+  pedido        pedido[]
+
+  @@unique([id, fk_usuario_id])
+}
+
+model endereco {
+  id            Int      @id @default(autoincrement())
+  cep           String?
+  logradouro    String?
+  numero        String?
+  complemento   String?
+  bairro        String?
+  cidade        String?
+  estado        String?
+  fk_cliente_id Int?
+  cliente       cliente? @relation(fields: [fk_cliente_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_endereco_cliente")
+}
+
+model forma_pagamento {
+  id     Int      @id @default(autoincrement())
+  nome   String?
+  pedido pedido[]
+}
+
+model funcionario {
+  id            Int     @default(autoincrement())
+  fk_usuario_id Int
+  usuario       usuario @relation(fields: [fk_usuario_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_funcionario_usuario")
+
+  @@id([id, fk_usuario_id])
+}
+
+model item {
+  quantidade          Decimal?              @db.Decimal(10, 0)
+  preco_unitario      Decimal?              @db.Decimal(10, 0)
+  id                  Int                   @id @default(autoincrement())
+  fk_produto_id       Int?
+  fk_pedido_id        Int?
+  pedido              pedido?               @relation(fields: [fk_pedido_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "fk_item_pedido")
+  produto             produto?              @relation(fields: [fk_produto_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_item_produto")
+  item_personalizacao item_personalizacao[] @ignore
+
+  @@unique([id, fk_pedido_id])
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model item_personalizacao {
+  fk_produto_personalizacao_id Int?
+  fk_item_id                   Int?
+  item                         item?           @relation(fields: [fk_item_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_item_personalizado")
+  personalizacao               personalizacao? @relation(fields: [fk_produto_personalizacao_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_produto_personalizacao_id")
+
+  @@ignore
+}
+
+model pedido {
+  id                    Int                  @id @default(autoincrement())
+  preco_total           Decimal?             @db.Decimal(10, 0)
+  frete                 Decimal?             @db.Decimal(10, 0)
+  observacao            String?
+  tipopedido            String?
+  datahora              DateTime?            @db.Timestamp(0)
+  fk_forma_pagamento_id Int?
+  fk_cliente_id         Int?
+  cliente               cliente?             @relation(fields: [fk_cliente_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_pedido_cliente")
+  forma_pagamento       forma_pagamento?     @relation(fields: [fk_forma_pagamento_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_pedido_forma_pagamento")
+  item                  item[]
+  recorrencia_pedido    recorrencia_pedido[] @ignore
+}
+
+model personalizacao {
+  id                     Int                      @id @default(autoincrement())
+  nome                   String?
+  preco_unitario         Decimal?                 @db.Decimal(10, 0)
+  item_personalizacao    item_personalizacao[]    @ignore
+  produto_personalizacao produto_personalizacao[] @ignore
+}
+
+model produto {
+  id                     Int                      @id @default(autoincrement())
+  preco_unitario         Decimal?                 @db.Decimal(10, 0)
+  metrica                String?
+  nome                   String?
+  item                   item[]
+  produto_personalizacao produto_personalizacao[] @ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model produto_personalizacao {
+  fk_personalizacao_id Int?
+  fk_produto_id        Int?
+  personalizacao       personalizacao? @relation(fields: [fk_personalizacao_id], references: [id], onUpdate: NoAction, map: "fk_produto_personalizacao")
+  produto              produto?        @relation(fields: [fk_produto_id], references: [id], onUpdate: NoAction, map: "fk_personalizacao_produto")
+
+  @@ignore
+}
+
+model recorrencia {
+  id                 Int                  @id @default(autoincrement())
+  data_inicio        DateTime?            @db.Timestamp(0)
+  data_fim           DateTime?            @db.Timestamp(0)
+  intervalo_dias     Int
+  recorrencia_pedido recorrencia_pedido[] @ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model recorrencia_pedido {
+  fk_recorrencia_id Int?
+  fk_pedido_id      Int?
+  pedido            pedido?      @relation(fields: [fk_pedido_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "fk_recorrencia_pedido")
+  recorrencia       recorrencia? @relation(fields: [fk_recorrencia_id], references: [id], onUpdate: NoAction, map: "fk_recorrencia")
+
+  @@ignore
+}
+
+model usuario {
+  nome        String?
+  usuario     String?       @unique @db.VarChar(255)
+  senha       String?
+  id          Int           @id @default(autoincrement())
+  cliente     cliente[]
+  funcionario funcionario[]
+}
