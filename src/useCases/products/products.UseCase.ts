@@ -1,5 +1,5 @@
-import BaseUseCase from "global/base/Base.UseCase";
-import ProductRepository from "repositories/product.Repository";
+import BaseUseCase from "../../global/base/Base.UseCase";
+import ProductRepository from "../../repositories/product.Repository";
 
 export default class ProductsUseCase extends BaseUseCase<any, any> {
     constructor(){

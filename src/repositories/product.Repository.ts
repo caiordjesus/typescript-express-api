@@ -1,4 +1,4 @@
-import BaseRepository from "global/base/Base.Repository"
+import BaseRepository from "../global/base/Base.Repository"
 
 export default class ProductRepository extends BaseRepository {
     protected create(dto: any): Promise<any> {
