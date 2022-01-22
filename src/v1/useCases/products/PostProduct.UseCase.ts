@@ -1,5 +1,5 @@
-import BaseUseCase from "../../global/base/Base.UseCase";
-import { Product } from "../../entities/product.Entity";
+import BaseUseCase from "../../../global/base/Base.UseCase";
+import { Product } from "../../../entities/product.Entity";
 
 export default class PostProductUseCase extends BaseUseCase<any, any> {
     constructor(){

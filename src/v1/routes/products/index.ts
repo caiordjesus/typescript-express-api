@@ -1,6 +1,6 @@
 import { mostAccessedProductsWithUseCase, ProductsWithUseCase, postProductWithUseCase } from '../../controllers/products'
 import { Router } from 'express'
-import controllerHandler from '../../global/handlers/controllerHandler'
+import controllerHandler from '../../../global/handlers/controllerHandler'
 
 const router = Router()
 

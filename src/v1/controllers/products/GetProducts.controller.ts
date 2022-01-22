@@ -1,4 +1,4 @@
-import BaseController from "../../global/base/Base.Controller"
+import BaseController from "../../../global/base/Base.Controller"
 
 export default class ProductsController extends BaseController{
     constructor(useCase: any) {
