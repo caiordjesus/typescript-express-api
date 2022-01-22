@@ -15,6 +15,7 @@ app.use(cors({
 dotenv.config()
 
 app.use(routes)
+
 app.use(express.json())
 
 route_map(app)
