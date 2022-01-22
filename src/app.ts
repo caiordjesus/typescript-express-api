@@ -7,6 +7,7 @@ import route_map from './assets/route_map'
 import server from './server'
 
 const app = express()
+
 app.use(cors({
     origin: '*',
 }))
