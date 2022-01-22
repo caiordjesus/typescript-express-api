@@ -1,5 +1,5 @@
 {
-	"include": ["src/**/*"],
+	"include": ["src/**/*", "src/repositories/.Repository.ts"],
 	"exclude": ["node_modules"],
 	"compilerOptions": {
         "experimentalDecorators": true,
