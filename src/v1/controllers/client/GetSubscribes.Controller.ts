@@ -21,6 +21,7 @@ export default class GetSubscribesController extends BaseController{
                 recorrencia: true
             }
         })
+        client.$disconnect()
 
         return this.responseSuccess.ok(recorrencias)
     }
