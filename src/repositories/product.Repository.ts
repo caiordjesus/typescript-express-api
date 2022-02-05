@@ -16,7 +16,7 @@ export default class ProductRepository extends BaseRepository {
     public async findOne(id: number): Promise<any> {
         const produto = await this.ormClient?.produto.findFirst({
             where: {
-                id: 2
+                id: id
             },
             include: {
                 produto_personalizacao: {
@@ -26,8 +26,6 @@ export default class ProductRepository extends BaseRepository {
                 }
             }
         })
-
-        console.log(produto)
 
         return produto
     }

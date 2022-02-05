@@ -9,7 +9,7 @@ export default abstract class BaseRepository {
         this.connected = false
     }
 
-    public abstract findOne (id?: number): Promise<any>
+    protected abstract findOne (id?: number): Promise<any>
     protected abstract findMany (filter: any): Promise<any[]>
     protected abstract create (dto: any): Promise<any>
     protected abstract delete (id: number): Promise<any>
@@ -17,7 +17,7 @@ export default abstract class BaseRepository {
     public async findById(id?: number): Promise<any> {
         try {
             this.connect()
-            const obj = await this.findById(id)
+            const obj = await this.findOne(id)
             this.disconnect()
             return obj
         } catch (err) {

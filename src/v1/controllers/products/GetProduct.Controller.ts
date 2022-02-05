@@ -7,11 +7,11 @@ export default class GetProductController extends BaseController{
     }
 
     protected async executeImpl(req: HttpRequest): Promise<any> {
-        const idProduto = req.params.id_produto
+        const idProduto = parseInt(req.params.id_produto)
 
         const productRepository = new ProductRepository()
 
-        const produto = await productRepository.findOne(idProduto)
+        const produto = await productRepository.findById(idProduto)
 
         return this.responseSuccess.ok(produto)
     }

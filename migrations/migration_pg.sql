@@ -214,6 +214,10 @@ INSERT INTO personalizacao (id, nome, preco_unitario)
 VALUES (1, 'M&Ms', 5.50);
 INSERT INTO produto_personalizacao (fk_personalizacao_id, fk_produto_id)
 VALUES (1, 2); /* bolo com M&Ms */
+INSERT INTO personalizacao (id, nome, preco_unitario)
+VALUES (2, 'Ganache de chocolate', 10);
+INSERT INTO produto_personalizacao (fk_personalizacao_id, fk_produto_id)
+VALUES (2, 2); /* bolo com ganache de chocolate */
 
 /* ITEM DE PEDIDO */
 INSERT INTO item (id, quantidade, preco_unitario, fk_produto_id, fk_pedido_id)
