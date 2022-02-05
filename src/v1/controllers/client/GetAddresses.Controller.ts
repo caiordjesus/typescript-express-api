@@ -7,15 +7,13 @@ export default class GetAdressesController extends BaseController{
     }
 
     protected async executeImpl(req: HttpRequest): Promise<any> {
-        const idCliente = req.params.id_cliente
+        const idCliente = parseInt(req.params.id_cliente)
 
         const client = new PrismaClient()
         
         const enderecos = await client.endereco.findMany({
             where: {
-                cliente: {
-                    id: idCliente
-                }
+                fk_cliente_id: idCliente
             }
         })
 
