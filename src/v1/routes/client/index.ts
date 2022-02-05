@@ -1,4 +1,4 @@
-import { getAdressesController } from '../../controllers/client'
+import { getAdressesController, getSubscribesController } from '../../controllers/client'
 import { Router } from 'express'
 import controllerHandler from '../../../global/handlers/controllerHandler'
 import { PrismaClient } from "@prisma/client";
@@ -6,6 +6,7 @@ import { PrismaClient } from "@prisma/client";
 const router = Router({mergeParams: true})
 
 router.get('/enderecos', controllerHandler(getAdressesController))
+router.get('/assinaturas', controllerHandler(getSubscribesController))
 
 router.get('/pedidos', async (req, res) => {
     const params: any =  req.params
