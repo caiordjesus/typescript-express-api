@@ -33,6 +33,7 @@ CREATE TABLE PEDIDO (
     frete DECIMAL(10,0),
     observacao text,
     tipoPedido text,
+    status integer,
     dataHora TIMESTAMP(0),
     fk_forma_pagamento_id INTEGER,
     fk_cliente_id INTEGER
@@ -193,8 +194,8 @@ INSERT INTO forma_pagamento (id, nome)
 VALUES (1, 'dinheiro');
 
 /* PEDIDO */
-INSERT INTO pedido (id, preco_total, frete, observacao, tipoPedido, dataHora, fk_forma_pagamento_id, fk_cliente_id)
-VALUES (1, 66.60, 5.00, '', 'recorrencia', now(), 1, 1);
+INSERT INTO pedido (id, preco_total, frete, observacao, tipoPedido, dataHora, fk_forma_pagamento_id, fk_cliente_id, status)
+VALUES (1, 66.60, 5.00, '', 'recorrencia', now(), 1, 1, 1);
 
 /* RECORRENCIA */
 INSERT INTO recorrencia (id, data_inicio, data_fim, intervalo_dias)
