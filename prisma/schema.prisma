@@ -74,6 +74,7 @@ model pedido {
   frete                 Decimal?             @db.Decimal(10, 0)
   observacao            String?
   tipopedido            String?
+  status                Int?
   datahora              DateTime?            @db.Timestamp(0)
   fk_forma_pagamento_id Int?
   fk_cliente_id         Int?
