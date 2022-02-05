@@ -12,6 +12,8 @@ export default class GetPaymentMethodController extends BaseController{
         
         const formasPagamento = await client.forma_pagamento.findMany()
 
+        client.$disconnect()
+
         return this.responseSuccess.ok(formasPagamento)
     }
 }

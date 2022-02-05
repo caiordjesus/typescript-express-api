@@ -16,6 +16,7 @@ export default class GetAdressesController extends BaseController{
                 fk_cliente_id: idCliente
             }
         })
+        client.$disconnect()
 
         return this.responseSuccess.ok(enderecos)
     }
