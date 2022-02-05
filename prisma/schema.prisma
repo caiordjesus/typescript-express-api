@@ -81,7 +81,7 @@ model pedido {
   cliente               cliente?             @relation(fields: [fk_cliente_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_pedido_cliente")
   forma_pagamento       forma_pagamento?     @relation(fields: [fk_forma_pagamento_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_pedido_forma_pagamento")
   item                  item[]
-  recorrencia_pedido    recorrencia_pedido[] @ignore
+  recorrencia_pedido    recorrencia_pedido[]
 }
 
 model personalizacao {
@@ -116,17 +116,16 @@ model recorrencia {
   data_inicio        DateTime?            @db.Timestamp(0)
   data_fim           DateTime?            @db.Timestamp(0)
   intervalo_dias     Int
-  recorrencia_pedido recorrencia_pedido[] @ignore
+  recorrencia_pedido recorrencia_pedido[]
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model recorrencia_pedido {
-  fk_recorrencia_id Int?
-  fk_pedido_id      Int?
+  fk_recorrencia_id Int 
+  fk_pedido_id      Int 
   pedido            pedido?      @relation(fields: [fk_pedido_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "fk_recorrencia_pedido")
-  recorrencia       recorrencia? @relation(fields: [fk_recorrencia_id], references: [id], onUpdate: NoAction, map: "fk_recorrencia")
+  recorrencia       recorrencia?  @relation(fields: [fk_recorrencia_id], references: [id], onUpdate: NoAction, map: "fk_recorrencia")
 
-  @@ignore
+  @@id([fk_recorrencia_id, fk_pedido_id])
 }
 
 model usuario {
