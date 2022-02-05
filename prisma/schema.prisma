@@ -89,7 +89,7 @@ model personalizacao {
   nome                   String?
   preco_unitario         Decimal?                 @db.Decimal(10, 0)
   item_personalizacao    item_personalizacao[]    @ignore
-  produto_personalizacao produto_personalizacao[] @ignore
+  produto_personalizacao produto_personalizacao[]
 }
 
 model produto {
@@ -98,17 +98,16 @@ model produto {
   metrica                String?
   nome                   String?
   item                   item[]
-  produto_personalizacao produto_personalizacao[] @ignore
+  produto_personalizacao produto_personalizacao[]
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model produto_personalizacao {
-  fk_personalizacao_id Int?
-  fk_produto_id        Int?
+  fk_personalizacao_id Int
+  fk_produto_id        Int
   personalizacao       personalizacao? @relation(fields: [fk_personalizacao_id], references: [id], onUpdate: NoAction, map: "fk_produto_personalizacao")
   produto              produto?        @relation(fields: [fk_produto_id], references: [id], onUpdate: NoAction, map: "fk_personalizacao_produto")
 
-  @@ignore
+  @@id([fk_personalizacao_id, fk_produto_id])
 }
 
 model recorrencia {

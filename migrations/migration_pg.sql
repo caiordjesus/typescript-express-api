@@ -99,7 +99,8 @@ CREATE TABLE ENDERECO (
 
 CREATE TABLE PRODUTO_PERSONALIZACAO (
     fk_personalizacao_id INTEGER,
-    fk_produto_id INTEGER
+    fk_produto_id INTEGER,
+    PRIMARY KEY (fk_personalizacao_id, fk_produto_id)
 );
 
 CREATE TABLE RECORRENCIA_PEDIDO (
