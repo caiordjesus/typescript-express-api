@@ -104,7 +104,8 @@ CREATE TABLE PRODUTO_PERSONALIZACAO (
 
 CREATE TABLE RECORRENCIA_PEDIDO (
     fk_recorrencia_id INTEGER,
-    fk_pedido_id INTEGER
+    fk_pedido_id INTEGER,
+    PRIMARY KEY (fk_recorrencia_id, fk_pedido_id)
 );
 
 create table ITEM_PERSONALIZACAO
