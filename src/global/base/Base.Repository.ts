@@ -9,7 +9,7 @@ export default abstract class BaseRepository {
         this.connected = false
     }
 
-    protected abstract findOne (id?: number): Promise<any>
+    public abstract findOne (id?: number): Promise<any>
     protected abstract findMany (filter: any): Promise<any[]>
     protected abstract create (dto: any): Promise<any>
     protected abstract delete (id: number): Promise<any>

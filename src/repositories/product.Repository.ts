@@ -13,8 +13,23 @@ export default class ProductRepository extends BaseRepository {
     protected delete(id: number): Promise<any> {
         return Promise.resolve({})
     }
-    protected findOne(id: number): Promise<any> {
-        return Promise.resolve({})
+    public async findOne(id: number): Promise<any> {
+        const produto = await this.ormClient?.produto.findFirst({
+            where: {
+                id: 2
+            },
+            include: {
+                produto_personalizacao: {
+                    include: {
+                        personalizacao: true
+                    }
+                }
+            }
+        })
+
+        console.log(produto)
+
+        return produto
     }
     protected async findMany(filter?: productFilter): Promise<any[]> {
         const produtos = await this.ormClient?.produto.findMany({
