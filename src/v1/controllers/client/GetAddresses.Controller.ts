@@ -1,3 +1,4 @@
+import { prisma, PrismaClient } from "@prisma/client"
 import BaseController from "../../../global/base/Base.Controller"
 
 export default class GetAdressesController extends BaseController{
@@ -6,17 +7,18 @@ export default class GetAdressesController extends BaseController{
     }
 
     protected async executeImpl(req: HttpRequest): Promise<any> {
-        // const products = await this.useCase.execute()
+        const idCliente = req.params.id_cliente
 
-        return this.responseSuccess.ok({
-            enderecos: [
-                {
-                    cep: '26156-012',
-                    logradouro: 'Rua mockupada',
-                    numero: '100',
-                    complemento: 'Bl 2 Apt 1651',
-                },
-            ]
+        const client = new PrismaClient()
+        
+        const enderecos = await client.endereco.findMany({
+            where: {
+                cliente: {
+                    id: idCliente
+                }
+            }
         })
+
+        return this.responseSuccess.ok(enderecos)
     }
 }
