@@ -1,3 +1,5 @@
+classwork for PCSSGB class.
+
 TODO: create real documentation
 ## Dev version
 1. `yarn deps` or `npm run deps`
