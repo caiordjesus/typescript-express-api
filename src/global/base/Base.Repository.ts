@@ -1,4 +1,5 @@
 import { Prisma, PrismaClient } from "@prisma/client";
+import prisma from '../config/prisma_config'
 
 export default abstract class BaseRepository {
     
@@ -18,10 +19,10 @@ export default abstract class BaseRepository {
         try {
             this.connect()
             const obj = await this.findOne(id)
-            this.disconnect()
+            // this.disconnect()
             return obj
         } catch (err) {
-            this.disconnect()
+            // this.disconnect()
             console.log('[BASE REPOSITORY - ERROR] msg:', err)
         }
     }
@@ -52,7 +53,7 @@ export default abstract class BaseRepository {
 
     private connect() {
         if (!this.connected) {
-            this.ormClient = new PrismaClient()
+            this.ormClient = prisma
             this.connected = true
         }
     }

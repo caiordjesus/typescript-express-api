@@ -1,7 +1,7 @@
 import { getAdressesController, getSubscribesController } from '../../controllers/client'
 import { Router } from 'express'
 import controllerHandler from '../../../global/handlers/controllerHandler'
-import { PrismaClient } from "@prisma/client";
+import prisma from '../../../global/config/prisma_config'
 
 const router = Router({mergeParams: true})
 
@@ -67,7 +67,7 @@ async function setOnCache (redisClient: any, clientId: number, pedidos: any) {
 }
 
 async function fetchOnDatabase(codigo: any) {
-    const client = new PrismaClient()
+    const client = prisma
     const orders = await client.pedido.findMany({
         where: {
             fk_cliente_id: codigo

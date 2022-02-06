@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client"
+import prisma from '../../../global/config/prisma_config'
 import BaseController from "../../../global/base/Base.Controller"
 
 export default class GetPersonalizationsController extends BaseController{
@@ -8,7 +8,7 @@ export default class GetPersonalizationsController extends BaseController{
 
     protected async executeImpl(req: HttpRequest): Promise<any> {
         
-        const client = new PrismaClient()
+        const client = prisma
 
         const personalizations = await client.personalizacao.findMany()
 

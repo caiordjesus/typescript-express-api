@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client"
+import prisma from '../../../global/config/prisma_config'
 import BaseController from "../../../global/base/Base.Controller"
 
 export default class GetOrdersController extends BaseController{
@@ -8,7 +8,8 @@ export default class GetOrdersController extends BaseController{
 
     protected async executeImpl(req: HttpRequest): Promise<any> {
 
-        console.log(req.body)
+        const redisClient = req.app.locals.redisClient
+
         const order = {
             clientId: req.body.clientId,
             formaPagamentoId: req.body.formaPagamentoId,
@@ -18,7 +19,9 @@ export default class GetOrdersController extends BaseController{
             itens: req.body.item
         }
 
-        const client = new PrismaClient()
+        const client = prisma
+
+        console.log('order.clientId =>', order.clientId)
 
         const pedido = await client.pedido.create({
             data: {
@@ -33,7 +36,9 @@ export default class GetOrdersController extends BaseController{
             }
         })
 
+        
         for (const item of order.itens) {
+            console.log('pedido.id =>', pedido.id)
             const itemPersistido = await client.item.create({
                 data: {
                     fk_pedido_id: pedido.id,
@@ -43,18 +48,32 @@ export default class GetOrdersController extends BaseController{
                 }
             })
 
-            for(const personalizacao of item.item_personalizacao) {
-                await client.item_personalizacao.create({
-                    data: {
-                        fk_item_id: itemPersistido.id,
-                        fk_produto_personalizacao_id: personalizacao.personalizacaoId
-                    }
-                })
-            }
-        }   
+            console.log('itemPersistido.id =>', itemPersistido.id)
 
-        client.$disconnect()
+            console.log(item.item_personalizacao)
+            if (item.item_personalizacao) {
+                for(const personalizacao of item.item_personalizacao) {
+                    await client.item_personalizacao.create({
+                        data: {
+                            fk_item_id: itemPersistido.id,
+                            fk_produto_personalizacao_id: personalizacao.personalizacaoId
+                        }
+                    })
+                }
+            }
+        }
+
+        resetCache(redisClient, order.clientId)
 
         return this.responseSuccess.ok()
     }
+}
+
+function resetCache(redisClient: any, clientId: number) {
+    const key = buildOrdersKeyToClient(clientId)
+    redisClient.del(key)
+}
+
+function buildOrdersKeyToClient (clientId: number) {
+    return `orders:${clientId}:list`
 }

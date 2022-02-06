@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client"
+import prisma from '../../../global/config/prisma_config'
 import BaseController from "../../../global/base/Base.Controller"
 
 export default class GetSubscribesController extends BaseController{
@@ -9,7 +9,7 @@ export default class GetSubscribesController extends BaseController{
     protected async executeImpl(req: HttpRequest): Promise<any> {
         const idCliente = parseInt(req.params.id_cliente)
 
-        const client = new PrismaClient()
+        const client = prisma
         
         const recorrencias = await client.recorrencia_pedido.findMany({
             where: {
