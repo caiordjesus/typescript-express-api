@@ -1,4 +1,4 @@
-import { redisClientConnect } from "global/config/redis_config";
+import { redisClientConnect } from "./global/config/redis_config";
 
 export default async function init(app: any) {
   try {
