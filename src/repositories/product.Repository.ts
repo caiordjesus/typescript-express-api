@@ -35,6 +35,7 @@ export default class ProductRepository extends BaseRepository {
                 produto_personalizacao: true
             }
         }) || []
+        console.log(produtos)
         return produtos
     }
 }

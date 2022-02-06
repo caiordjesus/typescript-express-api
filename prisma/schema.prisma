@@ -53,7 +53,7 @@ model item {
   fk_pedido_id        Int?
   pedido              pedido?               @relation(fields: [fk_pedido_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "fk_item_pedido")
   produto             produto?              @relation(fields: [fk_produto_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_item_produto")
-  item_personalizacao item_personalizacao[] 
+  item_personalizacao item_personalizacao[]
 
   @@unique([id, fk_pedido_id])
 }
@@ -61,8 +61,8 @@ model item {
 model item_personalizacao {
   fk_produto_personalizacao_id Int
   fk_item_id                   Int
-  item                         item?           @relation(fields: [fk_item_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_item_personalizado")
-  personalizacao               personalizacao? @relation(fields: [fk_produto_personalizacao_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_produto_personalizacao_id")
+  item                         item           @relation(fields: [fk_item_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_item_personalizado")
+  personalizacao               personalizacao @relation(fields: [fk_produto_personalizacao_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_produto_personalizacao_id")
 
   @@id([fk_produto_personalizacao_id, fk_item_id])
 }
@@ -87,7 +87,7 @@ model personalizacao {
   id                     Int                      @id @default(autoincrement())
   nome                   String?
   preco_unitario         Decimal?                 @db.Decimal(10, 0)
-  item_personalizacao    item_personalizacao[]    @ignore
+  item_personalizacao    item_personalizacao[]
   produto_personalizacao produto_personalizacao[]
 }
 
@@ -103,8 +103,8 @@ model produto {
 model produto_personalizacao {
   fk_personalizacao_id Int
   fk_produto_id        Int
-  personalizacao       personalizacao? @relation(fields: [fk_personalizacao_id], references: [id], onUpdate: NoAction, map: "fk_produto_personalizacao")
-  produto              produto?        @relation(fields: [fk_produto_id], references: [id], onUpdate: NoAction, map: "fk_personalizacao_produto")
+  personalizacao       personalizacao @relation(fields: [fk_personalizacao_id], references: [id], onDelete: SetNull, onUpdate: NoAction, map: "fk_produto_personalizacao")
+  produto              produto        @relation(fields: [fk_produto_id], references: [id], onDelete: SetNull, onUpdate: NoAction, map: "fk_personalizacao_produto")
 
   @@id([fk_personalizacao_id, fk_produto_id])
 }
@@ -118,10 +118,10 @@ model recorrencia {
 }
 
 model recorrencia_pedido {
-  fk_recorrencia_id Int 
-  fk_pedido_id      Int 
-  pedido            pedido?      @relation(fields: [fk_pedido_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "fk_recorrencia_pedido")
-  recorrencia       recorrencia?  @relation(fields: [fk_recorrencia_id], references: [id], onUpdate: NoAction, map: "fk_recorrencia")
+  fk_recorrencia_id Int
+  fk_pedido_id      Int
+  pedido            pedido      @relation(fields: [fk_pedido_id], references: [id], onUpdate: NoAction, map: "fk_recorrencia_pedido")
+  recorrencia       recorrencia @relation(fields: [fk_recorrencia_id], references: [id], onDelete: SetNull, onUpdate: NoAction, map: "fk_recorrencia")
 
   @@id([fk_recorrencia_id, fk_pedido_id])
 }
