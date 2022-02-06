@@ -13,7 +13,8 @@ const controllerHandler = (controller: BaseController) => {
             ip: req.ip,
             method: req.method,
             path: req.path,
-            headers: req.headers
+            headers: req.headers,
+            app: req.app
         }
 
         const response: BaseApiResponse = await controller.execute(httpRequest)

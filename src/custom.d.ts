@@ -13,6 +13,7 @@ interface HttpRequest {
     method: string
     path: string
     headers: { [key: string]: any }
+    app: any
 }
 
 interface HttpResponse {

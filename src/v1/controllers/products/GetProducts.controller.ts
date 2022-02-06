@@ -6,7 +6,8 @@ export default class ProductsController extends BaseController{
     }
 
     protected async executeImpl(req: HttpRequest): Promise<any> {
-        const products = await this.useCase.execute()
+        const redisClient = req.app.locals.redisClient
+        const products = await this.useCase.execute(redisClient)
 
         return this.responseSuccess.ok(products)
     }

@@ -6,18 +6,16 @@ export default class ProductsUseCase extends BaseUseCase<any, any> {
     constructor(){
         super(null)
     }
-    async execute() {
-        const redis = await redisClientConnect()
-        const cache = await redis.get('produtos')
+    async execute(redisClient: any) {
+        const cache = await redisClient.get('produtos')
         if (cache) {
             console.log('FROM REDIS')
-            redis.disconnect()
             return JSON.parse(cache)
         }
 
         const productRepository = new ProductRepository()
         const produtos = await productRepository.find()
-        redis.set('produtos', JSON.stringify(produtos), {
+        redisClient.set('produtos', JSON.stringify(produtos), {
             EX:  24 * 60 * 60 //24 hours
         })
         console.log('FROM POSTGRES')
