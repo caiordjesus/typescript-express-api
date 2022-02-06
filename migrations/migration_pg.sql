@@ -111,8 +111,9 @@ CREATE TABLE RECORRENCIA_PEDIDO (
 
 create table ITEM_PERSONALIZACAO
 (
-    fk_produto_personalizacao_id int null,
-    fk_item_id int null
+    fk_produto_personalizacao_id INTEGER,
+    fk_item_id INTEGER,
+    PRIMARY KEY (fk_produto_personalizacao_id, fk_item_id)
 );
 
 ALTER TABLE CLIENTE ADD CONSTRAINT fk_cliente_usuario

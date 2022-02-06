@@ -17,3 +17,19 @@ router.use('/metodo_pagamento', check_user_middleware, payment_method_routes)
 router.use('/personalizacoes', check_user_middleware, personalization_routes)
 
 export default router
+
+interface CreateOrderDTO{
+    clientId: number,
+    formaPagamentoId: number,
+    frete: number,
+    observacao: string,
+    preco_total: number,
+    item: [{
+        quantidade: number,
+        preco_unitario: number,
+        produtoId: number,
+        item_personalizacao: [{
+            personalizacaoId: number
+        }]
+    }]
+}

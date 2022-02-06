@@ -1,4 +1,4 @@
-import { getOrdersController } from '../../controllers/orders'
+import { getOrdersController, postOrderController } from '../../controllers/orders'
 import { Router } from 'express'
 import controllerHandler from '../../../global/handlers/controllerHandler'
 import { PrismaClient } from "@prisma/client";
@@ -7,6 +7,7 @@ import { PrismaClient } from "@prisma/client";
 const router = Router()
 
 router.get('/', controllerHandler(getOrdersController))
+router.post('/', controllerHandler(postOrderController))
 
 router.get('/:codigo', async (req, res) => {
     const client = new PrismaClient()

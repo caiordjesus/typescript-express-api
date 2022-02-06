@@ -53,19 +53,18 @@ model item {
   fk_pedido_id        Int?
   pedido              pedido?               @relation(fields: [fk_pedido_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "fk_item_pedido")
   produto             produto?              @relation(fields: [fk_produto_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_item_produto")
-  item_personalizacao item_personalizacao[] @ignore
+  item_personalizacao item_personalizacao[] 
 
   @@unique([id, fk_pedido_id])
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model item_personalizacao {
-  fk_produto_personalizacao_id Int?
-  fk_item_id                   Int?
+  fk_produto_personalizacao_id Int
+  fk_item_id                   Int
   item                         item?           @relation(fields: [fk_item_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_item_personalizado")
   personalizacao               personalizacao? @relation(fields: [fk_produto_personalizacao_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_produto_personalizacao_id")
 
-  @@ignore
+  @@id([fk_produto_personalizacao_id, fk_item_id])
 }
 
 model pedido {
