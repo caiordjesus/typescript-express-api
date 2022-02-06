@@ -1,4 +1,3 @@
-import { redisClientConnect } from "global/config/redis_config";
 import BaseUseCase from "../../../global/base/Base.UseCase";
 import ProductRepository from "../../../repositories/product.Repository";
 

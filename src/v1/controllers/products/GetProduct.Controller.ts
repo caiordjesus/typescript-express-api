@@ -1,4 +1,4 @@
-import ProductRepository from "repositories/product.Repository"
+import ProductRepository from "../../../repositories/product.Repository"
 import BaseController from "../../../global/base/Base.Controller"
 
 export default class GetProductController extends BaseController{
