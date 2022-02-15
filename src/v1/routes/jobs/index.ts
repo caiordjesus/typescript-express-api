@@ -10,7 +10,14 @@ router.post('/invokeById/:process_id', async (req, res) => {
         return res.json({message:'Not supported!'})
     }
 
-    return res.json({message:'unimplemented!'})
+    try {
+        await prisma.$executeRaw`call criar_recorrencias()`;
+    } catch (error) {
+        return res.status(503).json({message: 'Server error on calling routine.'})
+    }
+    
+
+    return res.status(201).json({message:'Executed routine successfully'})
 })
 
 
