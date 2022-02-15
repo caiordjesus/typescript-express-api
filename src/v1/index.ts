@@ -5,7 +5,8 @@ import order_routes from './routes/orders'
 import client_routes from './routes/client'
 import payment_method_routes from './routes/payment_method'
 import personalization_routes from './routes/personalizations'
-import { check_user_middleware } from '../middlewares'
+import jobs_routes from './routes/jobs'
+import { check_job_basic_auth, check_user_middleware } from '../middlewares'
 
 const router = Router()
 
@@ -15,6 +16,7 @@ router.use('/pedidos', check_user_middleware, order_routes)
 router.use('/cliente/:id_cliente', check_user_middleware, client_routes)
 router.use('/metodo_pagamento', check_user_middleware, payment_method_routes)
 router.use('/personalizacoes', check_user_middleware, personalization_routes)
+router.use('/jobs', check_job_basic_auth, jobs_routes)
 
 export default router
 
