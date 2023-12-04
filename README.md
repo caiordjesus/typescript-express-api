@@ -1,4 +1,3 @@
-classwork for PCSSGB class.
 
 TODO: create real documentation
 ## Dev version
